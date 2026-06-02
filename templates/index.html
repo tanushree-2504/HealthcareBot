@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediBot – AI Healthcare Assistant</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .splash-content {
+            text-align: center;
+            color: #ffffff;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .splash-content h1 {
+            font-size: 52px;
+            margin: 12px 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .splash-content p {
+            font-size: 20px;
+            color: #8b949e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="splashScreen">
+        <div class="splash-content">
+            <div style="font-size: 65px;">🩺</div>
+            <h1>MediBot</h1>
+            <p>AI Powered Healthcare Assistant</p>
+        </div>
+    </div>
+
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="logo-row">
+                <div class="logo-icon">⚕</div>
+                <div>
+                    <div class="logo-name">MediBot</div>
+                    <div class="logo-sub">AI Healthcare Assistant</div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="how-card">
+                <div class="how-title">How it works</div>
+                <div class="how-step">
+                    <div class="step-num">1</div>
+                    <div class="step-txt">Say hello to begin</div>
+                </div>
+                <div class="how-step">
+                    <div class="step-num">2</div>
+                    <div class="step-txt">Share your name</div>
+                </div>
+                <div class="how-step">
+                    <div class="step-num">3</div>
+                    <div class="step-txt">Describe your symptoms</div>
+                </div>
+                <div class="how-step">
+                    <div class="step-num">4</div>
+                    <div class="step-txt">Get your AI analysis</div>
+                </div>
+            </div>
+            <div class="warn-box">⚠ For educational use only. Always consult a licensed doctor before taking any
+                medication.</div>
+            <div class="stat-card">
+                <div class="stat-item">
+                    <div class="stat-num">10</div>
+                    <div class="stat-label">Diseases</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-num">48</div>
+                    <div class="stat-label">Symptoms</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-num">RF</div>
+                    <div class="stat-label">ML Model</div>
+                </div>
+            </div>
+            <button class="restart-btn" onclick="restartChat()">↺ New Consultation</button>
+            <button class="restart-btn" onclick="downloadPDF()">⬇ Download Report</button>
+        </aside>
+
+        <main class="chat-area">
+            <div class="chat-header">
+                <button id="themeToggle">🌙 Dark Mode</button>
+                <div class="bot-avatar">🤖</div>
+                <div class="header-info">
+                    <div class="header-name">MediBot</div>
+                    <div class="header-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online — Random Forest AI</span>
+                    </div>
+                </div>
+                <div class="header-badge">AI Powered</div>
+            </div>
+
+            <div class="messages-container" id="messages"></div>
+
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Describe your symptoms or say hello..."
+                    autocomplete="off" />
+                <button onclick="sendMessage()" id="sendBtn" aria-label="Send message">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

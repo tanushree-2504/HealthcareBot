@@ -29,7 +29,6 @@ def build_result_message(result, name):
         for item in result["top3"][1:]:
             top3_text += f"• {item['disease']} — {item['confidence']}%\n"
             
-    # FIXED: Using a safe native f-string without the trailing % operator to avoid the 500 crash
     return f"""🩺 AI Health Analysis for {name}
 
 ━━━━━━━━━━━━━━━━━━━━━
@@ -136,7 +135,6 @@ def get_response(message, session_id):
         name = state.get("name", "you")
         state["stage"] = "done"
         
-        # FIXED: Added fallback checking so if the model doesn't find a match, it won't crash
         if result and isinstance(result, dict):
             result["symptoms"] = state["symptoms"]
             return {
@@ -177,4 +175,5 @@ def chat():
         return jsonify({"message": "Something went wrong. Please refresh and try again.", "type": "error"}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    # Configured to allow Docker internal networking routing variables to resolve seamlessly
+    app.run(host="0.0.0.0", port=5000)
